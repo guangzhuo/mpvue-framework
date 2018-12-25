@@ -19,11 +19,16 @@
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
     </form>
     <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
+    <div class="one">
+      <div class="two">123</div>
+    </div>
   </div>
 </template>
 
 <script>
 import card from '@/components/card'
+import { mapState, mapMutations } from 'vuex'
+import { SET_OPEN_ID } from '../../store/mutation-types'
 
 export default {
   data () {
@@ -32,12 +37,20 @@ export default {
       userInfo: {}
     }
   },
-
-  components: {
-    card
+  computed: {
+    ...mapState([
+      'openId'
+    ])
   },
-
+  created () {
+    // 调用应用实例的方法获取全局数据
+    this.getUserInfo()
+    console.log(this.$router)
+  },
   methods: {
+    ...mapMutations({
+      setOpenId: 'SET_OPEN_ID'
+    }),
     bindViewTap () {
       const url = '../logs/main'
       wx.navigateTo({ url })
@@ -59,14 +72,18 @@ export default {
     }
   },
 
-  created () {
-    // 调用应用实例的方法获取全局数据
-    this.getUserInfo()
+  components: {
+    card
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.one{
+  .two{
+    color:red;
+  }
+}
 .userinfo {
   display: flex;
   flex-direction: column;
