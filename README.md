@@ -28,5 +28,7 @@ vuex-persistedstate: Vuex数据持久化
 
 mpvue-entry: 集中管理 main配置
 地址:https://github.com/F-loat/mpvue-entry
+
+mpvue-router-patch: 路由管理，与vue写法基本相同
 ```
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" @click="clickHandle('test click', $event)">
+  <div class="container" @click.stop="clickHandle('test click', $event)">
 
     <div class="userinfo" @click="bindViewTap">
       <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
@@ -18,7 +18,7 @@
       <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
     </form>
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
+    <div  @click="godemo" class="counter">去往Vuex示例页面</div>
     <div class="one">
       <div class="two">123</div>
     </div>
@@ -46,11 +46,18 @@ export default {
     // 调用应用实例的方法获取全局数据
     this.getUserInfo()
     console.log(this.$router)
+    console.log(this.$fly)
   },
   methods: {
     ...mapMutations({
       setOpenId: 'SET_OPEN_ID'
     }),
+    godemo () {
+      console.log(this.$router)
+      this.$router.push({
+        'path': '/pages/news/list'
+      })
+    },
     bindViewTap () {
       const url = '../logs/main'
       wx.navigateTo({ url })
