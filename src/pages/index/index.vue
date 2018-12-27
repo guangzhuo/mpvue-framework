@@ -52,7 +52,8 @@
     </form>-->
     <div  @click="godemo" class="counter">去往Vuex示例页面</div>
     <div class="one">
-      <div class="two">123</div>
+      <div class="two1">123</div>
+      <div class="two2">123</div>
     </div>
     <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
       获取用户信息
@@ -144,6 +145,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .two1{width:100%;background: red;height:10px;}
+  .two2{width:70rpx;background: black;height:10px;}
 .mapInfo{
   margin-bottom: 6px;
   .iconMap{
