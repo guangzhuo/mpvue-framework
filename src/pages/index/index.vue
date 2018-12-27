@@ -42,7 +42,7 @@
 
     <div class="usermotto">
       <div class="user-motto">
-        <card :text="motto"></card>
+        <card @getListData="listData"></card>
       </div>
     </div>
 
@@ -101,6 +101,10 @@ export default {
 
     arrowDown () {
       this.isShowScreen = !this.isShowScreen
+    },
+
+    listData (id) {
+      console.log(id)
     },
 
     godemo () {
