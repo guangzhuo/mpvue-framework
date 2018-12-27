@@ -23,11 +23,12 @@
 
       <!--二级筛选-->
       <div class="showScreen" v-show="isShowScreen">
-        <div class="listSre" v-for="(item,index) in listSre">
+        <div class="listSre" v-for="(item,index) in listSre" :key="index">
           <div class="titInfo">{{item.type}}</div>
           <div class="selectBtn">
             <van-button size="small" round disabled type="default">不限</van-button>
-            <van-button size="small" round type="default">默认按钮</van-button>
+            <van-button open-type="getUserInfo" size="small" round type="default" @getuserinfo="getuserBtn">默认按钮</van-button>
+            <van-button open-type='getPhoneNumber' size="small" round type="default" @getphonenumber="getPhone">默认按钮</van-button>
           </div>
         </div>
 
@@ -45,10 +46,10 @@
       </div>
     </div>
 
-    <form class="form-container">
+    <!--<form class="form-container">
       <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
+    </form>-->
     <div  @click="godemo" class="counter">去往Vuex示例页面</div>
     <div class="one">
       <div class="two">123</div>
@@ -125,6 +126,13 @@ export default {
     },
     onGotUserInfo (info) {
       console.log(info)
+    },
+    getuserBtn (e) {
+      console.log(e)
+      console.log('11')
+    },
+    getPhone (e) {
+      console.log(e)
     }
 
   },
