@@ -6,6 +6,7 @@
         "navigationBarTitleText": "文章列表",
         "enablePullDownRefresh": true
       }
+
     },
     {
       "path": "pages/conter/conter",
@@ -18,6 +19,9 @@
       "path": "pages/news/list"
     }
   ],
+  "usingComponents": {
+    "van-button": "../static/vant/button/index"
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

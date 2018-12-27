@@ -6186,6 +6186,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+vant-weapp@^0.5.0-beta:
+  version "0.5.0-beta"
+  resolved "https://registry.yarnpkg.com/vant-weapp/-/vant-weapp-0.5.0-beta.tgz#8e55dcbe079ad0fd4cb546edacec3c8292de7728"
+
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
