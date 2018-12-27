@@ -22,6 +22,9 @@
     <div class="one">
       <div class="two">123</div>
     </div>
+    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+      获取用户信息
+    </button>
   </div>
 </template>
 
@@ -73,6 +76,9 @@ export default {
           })
         }
       })
+    },
+    onGotUserInfo (info) {
+      console.log(info)
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
