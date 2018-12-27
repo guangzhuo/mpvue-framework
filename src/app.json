@@ -20,7 +20,8 @@
     }
   ],
   "usingComponents": {
-    "van-button": "../static/vant/button/index"
+    "van-button": "../static/vant/button/index",
+    "van-row": "../static/vant/row/index"
   },
   "window": {
     "backgroundTextStyle": "light",
@@ -32,11 +33,11 @@
     "list": [
       {
         "pagePath": "pages/index",
-        "text": "首页"
+        "text": "游泳馆"
       },
       {
         "pagePath": "pages/conter/conter",
-        "text": "日志"
+        "text": "我的"
       }
     ]
   }

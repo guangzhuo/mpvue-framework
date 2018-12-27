@@ -1,10 +1,41 @@
 <template>
-  <div class="container" @click.stop="clickHandle('test click', $event)">
+  <div class="container">
 
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-      <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
+    <!--地理位置-->
+    <div class="mapInfo">
+      <div class="iconMap"></div>
+      <span class="inforesed">杭州数字娱乐产业园</span>
+      <van-icon name="arrow" size="14px" custom-style="vertical-align: middle"/>
+    </div>
+
+    <!--筛选-->
+    <div class="screen">
+      <div class="sType">
+        <span class="ft_scr">距离优先</span>
+      </div>
+      <div class="sType">
+        <span class="ft_scr">价格优先</span>
+      </div>
+      <div class="sType" @click="arrowDown">
+        <span class="">筛选</span>
+        <van-icon :name="isShowScreen === true? 'arrow-up': 'arrow-down'" size="14px" custom-class="arrowDown"/>
+      </div>
+
+      <!--二级筛选-->
+      <div class="showScreen" v-show="isShowScreen">
+        <div class="listSre" v-for="(item,index) in listSre">
+          <div class="titInfo">{{item.type}}</div>
+          <div class="selectBtn">
+            <van-button size="small" round disabled type="default">不限</van-button>
+            <van-button size="small" round type="default">默认按钮</van-button>
+          </div>
+        </div>
+
+        <div class="BtnWrap">
+          <div class="resetBtn">重置</div>
+          <div class="lineclum"></div>
+          <div class="okBtn">确定</div>
+        </div>
       </div>
     </div>
 
@@ -40,8 +71,14 @@ import { SET_OPEN_ID } from '../../store/mutation-types'
 export default {
   data () {
     return {
-      motto: 'Hello World',
-      userInfo: {}
+      motto: '',
+      userInfo: {},
+      isShowScreen: false, // 显示筛选
+      listSre: [
+        {
+          type: '营业状态'
+        }
+      ]
     }
   },
   computed: {
@@ -59,6 +96,11 @@ export default {
     ...mapMutations({
       setOpenId: 'SET_OPEN_ID'
     }),
+
+    arrowDown () {
+      this.isShowScreen = !this.isShowScreen
+    },
+
     godemo () {
       console.log(this.$router)
       this.$router.push({
@@ -83,10 +125,8 @@ export default {
     },
     onGotUserInfo (info) {
       console.log(info)
-    },
-    clickHandle (msg, ev) {
-      console.log('clickHandle:', msg, ev)
     }
+
   },
 
   components: {
@@ -96,44 +136,83 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.one{
-  .two{
-    color:red;
+.mapInfo{
+  margin-bottom: 6px;
+  .iconMap{
+    width: 10px;
+    height:15px;
+    background: red;
+    margin: 0 6px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .inforesed{
+    font-size: 14px;
+    vertical-align: middle;
   }
 }
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
+  .screen{
+    position: relative;
+    border-bottom: 1rpx solid #999;
+    font-size: 12px;
+    text-align: left;
+    .sType{
+      padding:6px 0px 6px 10px;
+      display: inline-block;
+    }
 
-.userinfo-nickname {
-  color: #aaa;
-}
+    .ft_scr{
+      padding-right:10px;
+      border-right: 1rpx solid #999;
+    }
+    /*二级搜索*/
+    .showScreen{
+      position: absolute;
+      left:0;
+      right:0;
+      background: aliceblue;
+      z-index: 2;
+      border-bottom: 1px solid #999;
+      .listSre{
+        padding: 10px;
+      }
+      .titInfo{
+        padding-bottom: 10px;
+      }
+      .BtnWrap{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .resetBtn, .okBtn{
+        width:50%;
+        text-align: center;
+        height:36px;
+        line-height: 36px;
+        background: white;
+      }
+      .lineclum{
+        position: absolute;
+        left:0;
+        right: 0;
+        margin:auto;
+        width:1px;
+        height:26px;
+        background:gray;
+      }
+    }
 
-.usermotto {
-  margin-top: 150px;
-}
 
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-}
 
-.counter {
-  display: inline-block;
-  margin: 10px auto;
-  padding: 5px 10px;
-  color: blue;
-  border: 1px solid blue;
-}
+  }
+
+</style>
+<style lang="scss">
+  .screen{
+    .arrowDown{
+      padding-left:5px;
+      vertical-align: middle
+    }
+  }
 </style>
