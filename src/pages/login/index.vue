@@ -17,11 +17,11 @@
     onLoad () {
       var list = this.list
       // for循环遍历
-      for (var i = 0; i < list.length; i++) {
+      /* for (var i = 0; i < list.length; i++) {
         var str = list[i]
         // 调用授权方法
         this.checkauth(str)
-      }
+      } */
     },
     methods: {
       // 授权方法

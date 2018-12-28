@@ -99,7 +99,7 @@ export default {
   onLoad () {
     var that = this
     // 查看是否授权
-    wx.getSetting({
+    /* wx.getSetting({
       success (res) {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
@@ -118,7 +118,7 @@ export default {
           })
         }
       }
-    })
+    }) */
 
     wx.getSystemInfo({
       success: function (res) {
@@ -126,6 +126,25 @@ export default {
       }
     })
     // loadMore(that);
+
+    /* 地理位置 */
+    wx.getSetting({
+      success: (response) => {
+        if (!response.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success: () => {
+              console.log('授权成功')
+              wx.getLocation({
+                success: (data) => {
+                  console.log(data)
+                }
+              })
+            }
+          })
+        }
+      }
+    })
   },
   /* 上拉底部刷新更多 */
   onReachBottom () {
