@@ -17,8 +17,7 @@
     {
       "path": "pages/conter/conter",
       "config": {
-        "navigationBarTitleText": "文章列表2",
-        "enablePullDownRefresh": true
+        "navigationBarTitleText": "我的"
       }
     }
 
