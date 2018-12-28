@@ -86,6 +86,14 @@ export default {
     console.log(this.$fly)
   },
   onLoad () {
+    /* this.$fly.get('https://suggest.taobao.com/sug', {
+      code: 'utf-8',
+      q: '卫衣',
+      callback: 'cb'
+    }).then(data => {
+      console.log(data)
+    }) */
+
     var that = this
     console.log(this.$store)
     // 查看是否授权
