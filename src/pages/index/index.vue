@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="APP_INDEX">
 
     <!--地理位置-->
     <div class="mapInfo">
@@ -21,47 +21,37 @@
         <van-icon :name="isShowScreen === true? 'arrow-up': 'arrow-down'" size="14px" custom-class="arrowDown"/>
       </div>
 
-      <!--二级筛选-->
-      <div class="showScreen" v-show="isShowScreen">
-        <div class="listSre" v-for="(item,index) in listSre" :key="index">
-          <div class="titInfo">{{item.type}}</div>
-          <div class="selectBtn">
-            <van-button size="small" round disabled type="default">不限</van-button>
-            <van-button open-type="getUserInfo" size="small" round type="default" @getuserinfo="getuserBtn">默认按钮</van-button>
-            <van-button open-type='getPhoneNumber' size="small" round type="default" @getphonenumber="getPhone">默认按钮</van-button>
+      <!--二级筛选 isShowScreen-->
+        <div class="showScreen" v-show="isShowScreen">
+          <div class="listSre" v-for="(item,index) in listSre" :key="index">
+            <div class="titInfo">{{item.type}}</div>
+            <div class="selectBtn">
+              <van-button size="small" round disabled type="default">不限</van-button>
+              <van-button open-type="getUserInfo" size="small" round type="default" @getuserinfo="getuserBtn">默认按钮</van-button>
+              <van-button open-type='getPhoneNumber' size="small" round type="default" @getphonenumber="getPhone">默认按钮</van-button>
+            </div>
+          </div>
+
+          <div class="BtnWrap">
+            <div class="resetBtn">重置</div>
+            <div class="lineclum"></div>
+            <div class="okBtn">确定</div>
           </div>
         </div>
-
-        <div class="BtnWrap">
-          <div class="resetBtn">重置</div>
-          <div class="lineclum"></div>
-          <div class="okBtn">确定</div>
-        </div>
-      </div>
     </div>
 
     <div class="usermotto">
-      <div class="user-motto">
         <card @getListData="listData"></card>
-      </div>
     </div>
 
-    <!--<form class="form-container">
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>-->
-    <div  @click="godemo" class="counter">去往Vuex示例页面</div>
-    <div class="one">
-      <div class="two1">123</div>
-      <div class="two2">123</div>
+    <div class="codeWrap">
+      <div class="codeTitle">皇家游泳馆[翡翠店]</div>
+      <div class="codeTime">有效期：2018-12-15至2018-12-23</div>
+      <div class="goCode">
+        <van-button plain round size="small" custom-class="codeBtn" type="primary">扫码入场</van-button>
+      </div>
     </div>
-    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
-      获取用户信息
-    </button>
-    <van-button type="default">默认按钮</van-button>
-    <van-button type="primary">主要按钮</van-button>
-    <van-button type="warning">警告按钮</van-button>
-    <van-button type="danger">危险按钮</van-button>
+    <!--<div  @click="godemo" class="counter">去往Vuex示例页面</div>-->
   </div>
 </template>
 
@@ -73,8 +63,7 @@ import { SET_OPEN_ID } from '../../store/mutation-types'
 export default {
   data () {
     return {
-      motto: '',
-      userInfo: {},
+      // userInfo: {},
       isShowScreen: false, // 显示筛选
       scrollHeight: 0, // 高度
       page: 1, // 页码
@@ -92,14 +81,15 @@ export default {
   },
   created () {
     // 调用应用实例的方法获取全局数据
-    this.getUserInfo()
+    // this.getUserInfo()
     console.log(this.$router)
     console.log(this.$fly)
   },
   onLoad () {
     var that = this
+    console.log(this.$store)
     // 查看是否授权
-    /* wx.getSetting({
+    wx.getSetting({
       success (res) {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
@@ -118,7 +108,7 @@ export default {
           })
         }
       }
-    }) */
+    })
 
     wx.getSystemInfo({
       success: function (res) {
@@ -184,18 +174,7 @@ export default {
       const url = '../logs/main'
       wx.navigateTo({ url })
     },
-    getUserInfo () {
-      // 调用登录接口
-      wx.login({
-        success: () => {
-          wx.getUserInfo({
-            success: (res) => {
-              this.userInfo = res.userInfo
-            }
-          })
-        }
-      })
-    },
+
     onGotUserInfo (info) {
       console.log(info)
     },
@@ -254,7 +233,7 @@ export default {
       left:0;
       right:0;
       background: aliceblue;
-      z-index: 2;
+      z-index: 3;
       border-bottom: 1px solid #999;
       .listSre{
         padding: 10px;
@@ -289,12 +268,41 @@ export default {
 
   }
 
-</style>
-<style lang="scss">
-  .screen{
-    .arrowDown{
-      padding-left:5px;
-      vertical-align: middle
+  .codeWrap{
+    position: fixed;
+    z-index: 10;
+    bottom:0;
+    height: 50px;
+    left:10px;
+    right:10px;
+    background: rgba(0,0,0,.5);
+    border-radius: 10px;
+    font-size: 13px;
+    padding:6px 3px 0px 10px;
+    .codeTitle{
+      color:white;
+    }
+    .goCode{
+      position: absolute;
+      right: 6px;
+      top:15px;
+
     }
   }
+</style>
+<style lang="scss">
+  .APP_INDEX{
+    .screen{
+      .arrowDown{
+        padding-left:5px;
+        vertical-align: middle
+      }
+    }
+    .codeBtn{
+      border:.5px solid white;
+      background: transparent;
+      color:#fff !important;
+    }
+  }
+
 </style>

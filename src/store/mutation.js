@@ -6,6 +6,9 @@ const matations = {
    */
   [types.SET_OPEN_ID] (state, v) {
     state.openId = v
+  },
+  [types.SET_USERINFO] (state, v) {
+    state.userinfo = v
   }
 
 }

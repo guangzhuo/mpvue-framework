@@ -2,15 +2,17 @@
   <ul class="indexCard">
     <li class="cardList" @click="clickIndex('1')" v-for="(item,index) in cardList" :key="index">
       <div class="poIcon"></div>
-      <div class="leftImg" >
+      <div class="leftImg">
         <!--<img src="" class="leftImg" alt="">-->
       </div>
       <div class="rightWrap">
-        <h3 class="title">皇家游泳馆[翡翠店]</h3>
-        <h4 class="smallTitle">黄龙/高新文教区，距离我3.0km</h4>
-        <div class="timeMoney">
-          <span class="monery">¥20/时</span>
-          <span class="experience">起<span class="placeWin"></span>已有100+人体验</span>
+        <div class="conterInfo">
+          <h3 class="title">皇家游泳馆[翡翠店]</h3>
+          <h4 class="smallTitle">黄龙/高新文教区，距离我3.0km</h4>
+          <div class="timeMoney">
+            <span class="monery">¥20/时</span>
+            <span class="experience">起<span class="placeWin"></span>已有100+人体验</span>
+          </div>
         </div>
       </div>
     </li>
@@ -41,13 +43,15 @@ export default {
 
 <style lang="scss" scoped>
   .indexCard{
-    padding:5px 10px;
+    padding:12px 0px;
   }
 .cardList{
   display: flex;
   justify-content: space-between;
   position: relative;
+  margin-bottom: 12px;
   .leftImg{
+    margin-left: 10px;
     width:134px;
     height: 170px;
     border-radius: 6px;
@@ -56,7 +60,7 @@ export default {
   .poIcon{
     position: absolute;
     right:10px;
-    top:-6px;
+    top:-12px;
     width: 20px;
     height:20px;
     background: red;
@@ -66,8 +70,10 @@ export default {
   .rightWrap{
     width:211px;
     text-align: left;
-    border-bottom: 1px solid #999;
-
+    border-bottom: .5px solid #999;
+    .conterInfo{
+      margin-right: 10px;
+    }
     .title{
       font-size: 12px;
       padding: 6px 0px;

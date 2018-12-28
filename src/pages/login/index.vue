@@ -6,6 +6,9 @@
 </template>
 
 <script>
+  import {mapState, mapMutations} from 'vuex'
+  import { SET_USERINFO } from '../../store/mutation-types'
+
   export default {
     name: 'list',
     data () {
@@ -15,7 +18,25 @@
       }
     },
     onLoad () {
-      var list = this.list
+      let that = this
+      wx.getSetting({
+        success (res) {
+          if (res.authSetting['scope.userInfo']) {
+            wx.getUserInfo({
+              success (res) {
+                console.log(res)
+                // 从数据库获取用户信息
+                // that.queryUsreInfo()
+                // 用户已经授权过
+                wx.switchTab({
+                  url: '/pages/index'
+                })
+              }
+            })
+          }
+        }
+      })
+
       // for循环遍历
       /* for (var i = 0; i < list.length; i++) {
         var str = list[i]
@@ -24,6 +45,9 @@
       } */
     },
     methods: {
+      ...mapMutations({
+        'set_userinfo': SET_USERINFO
+      }),
       // 授权方法
       checkauth (str) {
         wx.getSetting({
@@ -43,6 +67,8 @@
         console.log(data)
         console.log(data.target.userInfo)
         if (data.target.userInfo) {
+          let userinfo = data.target.userInfo
+          this.set_userinfo(userinfo)
           wx.switchTab({
             url: '/pages/index'
           })
