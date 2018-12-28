@@ -1,8 +1,10 @@
 <template>
   <ul class="indexCard">
-    <li class="cardList" @click="clickIndex('1')">
+    <li class="cardList" @click="clickIndex('1')" v-for="(item,index) in cardList" :key="index">
       <div class="poIcon"></div>
-      <img src="" class="leftImg" alt="">
+      <div class="leftImg" >
+        <!--<img src="" class="leftImg" alt="">-->
+      </div>
       <div class="rightWrap">
         <h3 class="title">皇家游泳馆[翡翠店]</h3>
         <h4 class="smallTitle">黄龙/高新文教区，距离我3.0km</h4>
@@ -17,7 +19,12 @@
 
 <script>
 export default {
-  props: ['text'],
+  props: {
+    cardList: {
+      type: Array,
+      default: [1, 2, 3, 4, 5, 6]
+    }
+  },
   data () {
     return {
 

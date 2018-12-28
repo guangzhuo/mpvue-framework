@@ -16,7 +16,10 @@
       }
     },
     {
-      "path": "pages/news/list"
+      "path": "pages/login/index",
+      "config": {
+        "navigationBarTitleText": "登陆授权"
+      }
     }
   ],
   "usingComponents": {

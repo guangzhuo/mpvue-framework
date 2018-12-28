@@ -76,6 +76,8 @@ export default {
       motto: '',
       userInfo: {},
       isShowScreen: false, // 显示筛选
+      scrollHeight: 0, // 高度
+      page: 1, // 页码
       listSre: [
         {
           type: '营业状态'
@@ -94,6 +96,52 @@ export default {
     console.log(this.$router)
     console.log(this.$fly)
   },
+  onLoad () {
+    var that = this
+    // 查看是否授权
+    wx.getSetting({
+      success (res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success (res) {
+              // 从数据库获取用户信息
+              // that.queryUsreInfo()
+              // 用户已经授权过
+              // wx.switchTab({
+              //   url: ''
+              // })
+            }
+          })
+        } else {
+          that.$router.push({
+            path: '/pages/login/index'
+          })
+        }
+      }
+    })
+
+    wx.getSystemInfo({
+      success: function (res) {
+        that.scrollHeight = res.windowHeight
+      }
+    })
+    // loadMore(that);
+  },
+  /* 上拉底部刷新更多 */
+  onReachBottom () {
+    let that = this
+    console.log('2222')
+    // 显示加载图标'
+    wx.showLoading({
+      title: '玩命加载中'
+    })
+    // 页数+1
+    let page = this.page + 1
+    // 隐藏加载框
+    setTimeout(() => {
+      wx.hideLoading()
+    }, 1000)
+  },
   methods: {
     ...mapMutations({
       setOpenId: 'SET_OPEN_ID'
@@ -109,9 +157,9 @@ export default {
 
     godemo () {
       console.log(this.$router)
-      this.$router.push({
+      /* this.$router.push({
         'path': '/pages/news/list'
-      })
+      }) */
     },
     bindViewTap () {
       const url = '../logs/main'
